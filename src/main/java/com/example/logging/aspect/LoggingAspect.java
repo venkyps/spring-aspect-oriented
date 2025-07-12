@@ -47,8 +47,8 @@ public class LoggingAspect {
         logFacade.logThrownException(new ExceptionLogDto(className, methodName, ex));
     }
 
-    @Before("execution(* com.codility.aop.date.DateRepository.save(..)) || " +
-            "execution(* com.codility.aop.calendar.MeetingRepository.save(..))")
+    @Before("execution(* com.example.logging.repository.DateRepository.save(..)) || " +
+            "execution(* com.example.logging.repository.DateRepository.save(..))")
     public void logSavedEntities(JoinPoint joinPoint) {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         Object entity = joinPoint.getArgs()[0];
@@ -56,7 +56,7 @@ public class LoggingAspect {
         logFacade.logEntitySave(new EntitySaveLogDto(className, entity));
     }
 
-    @Around("execution(* com.codility.aop.database.DatabaseConnectivity.save(..))")
+    @Around("execution(* com.example.logging.repository.DateRepository.save(..))")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         Object entity = joinPoint.getArgs()[0];
